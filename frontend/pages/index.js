@@ -1,11 +1,12 @@
 // Import React and hooks
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import FileUploader from '../components/FileUploader';
 
 // Determine API base URL based on the environment
 const API_BASE_URL =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8000/api'
+    ? 'http://localhost:8000'
     : '/api';
 
 /**
@@ -24,6 +25,22 @@ function Home() {
   const messageContainerRef = useRef(null);
   // State for selected file via drag-and-drop
   const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState("");
+
+  useEffect(() => {
+    if (!selectedFile) return;
+    setUploadStatus("Indexing PDF...");
+    const form = new FormData();
+    form.append("file", selectedFile);
+    fetch(`${API_BASE_URL}/upload`, { method: "POST", body: form })
+      .then((r) => r.json())
+      .then((data) =>
+        setUploadStatus(`Indexed ${data.num_chunks} chunks.`)
+      )
+      .catch((e) =>
+        setUploadStatus(`Upload failed: ${e.message}`)
+      );
+  }, [selectedFile]);
 
   // Developer message serves as the system prompt
   const developerMessage = 'You are a helpful assistant.';
@@ -96,12 +113,16 @@ function Home() {
 
   return (
     <div className="container">
-      <h1>HOA Bud</h1>
+      <div className="header" style={{ textAlign: 'center' }}>
+        <Image src="/assets/hoa-bud-logo.png" alt="HOA Bud" width={218} height={100} />
+        <p className="tagline">The HOA assistant you’ve always wanted.</p>
+      </div>
       <FileUploader onFileSelect={setSelectedFile} />
       {selectedFile && <p>Selected file: {selectedFile.name}</p>}
+      {uploadStatus && <p>{uploadStatus}</p>}
       {/* API Key input field (sensitive) */}
       <div>
-        <label htmlFor="apiKey">API Key:</label>
+        <label htmlFor="apiKey">Openai API Key:</label>
         <input
           id="apiKey"
           type="password"
