@@ -6,7 +6,7 @@ import FileUploader from '../components/FileUploader';
 // Determine API base URL based on the environment
 const API_BASE_URL =
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8000'
+    ? 'http://localhost:8000/api'
     : '/api';
 
 /**
@@ -32,7 +32,7 @@ function Home() {
     setUploadStatus("Indexing PDF...");
     const form = new FormData();
     form.append("file", selectedFile);
-    fetch(`${API_BASE_URL}/upload`, { method: "POST", body: form })
+    fetch(`${API_BASE_URL}/upload/`, { method: "POST", body: form })
       .then((r) => r.json())
       .then((data) =>
         setUploadStatus(`Indexed ${data.num_chunks} chunks.`)
@@ -61,7 +61,7 @@ function Home() {
     let assistantText = '';
     try {
       // Send POST request to the chat endpoint
-      const response = await fetch(`${API_BASE_URL}/chat`, {
+      const response = await fetch(`${API_BASE_URL}/chat/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
