@@ -2,23 +2,25 @@
   "version": 2,
   "builds": [
     { "src": "frontend/package.json", "use": "@vercel/next" },
-    { "src": "api/*.py",            "use": "@vercel/python" }
-   ],
+    { "src": "api/upload.py",          "use": "@vercel/python" },
+    { "src": "api/chat.py",            "use": "@vercel/python" },
+    { "src": "api/health.py",          "use": "@vercel/python" }
+  ],
   "routes": [
     {
-      "src": "/api/upload/?",
+      "src": "^/api/upload/?$",
       "dest": "api/upload.py"
     },
     {
-      "src": "/api/chat/?",
+      "src": "^/api/chat/?$",
       "dest": "api/chat.py"
     },
     {
-      "src": "/api/health/?",
+      "src": "^/api/health/?$",
       "dest": "api/health.py"
     },
     {
-      "src": "/(.*)",
+      "src": "^/(.*)$",
       "dest": "frontend/$1"
     }
   ]
