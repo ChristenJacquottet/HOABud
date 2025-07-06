@@ -11,7 +11,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 # Import OpenAI client for interacting with OpenAI's API
 from openai import OpenAI
-import os
 import asyncio
 from typing import Optional
 
@@ -21,7 +20,7 @@ from aimakerspace.vectordatabase import VectorDatabase
 from aimakerspace.openai_utils.embedding import EmbeddingModel
 
 # Initialize FastAPI application with a title
-app = FastAPI(title="OpenAI Chat API", openapi_prefix="/api")
+app = FastAPI(title="OpenAI Chat API", root_path="/api")
 
 # Configure CORS (Cross-Origin Resource Sharing) middleware
 app.add_middleware(
