@@ -1,5 +1,6 @@
 import sys
 import os
+import tempfile
 # Ensure project root is on Python path for imports
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -50,7 +51,8 @@ async def upload_pdf(file: UploadFile = File(...)):
     """
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only .pdf allowed")
-    save_dir = "uploaded_files"
+    tmp_dir = tempfile.gettempdir()
+    save_dir = os.path.join(tmp_dir, "uploaded_files")
     os.makedirs(save_dir, exist_ok=True)
     path = os.path.join(save_dir, file.filename)
     # Save the uploaded PDF
