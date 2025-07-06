@@ -73,7 +73,7 @@ function FileUploader({ onFileSelect }) {
                 height="38"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#007bff"
+                stroke="#4198ce"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"

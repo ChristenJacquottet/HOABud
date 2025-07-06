@@ -112,7 +112,7 @@ function Home() {
   };
 
   return (
-    <div className="container">
+    <div className="container rounded-xl border bg-card text-card-foreground shadow">
       <div className="header" style={{ textAlign: 'center' }}>
         <Image src="/assets/hoa-bud-logo.png" alt="HOA Bud" width={218} height={100} />
         <p className="tagline">The HOA assistant you’ve always wanted.</p>
