@@ -21,7 +21,7 @@ from aimakerspace.vectordatabase import VectorDatabase
 from aimakerspace.openai_utils.embedding import EmbeddingModel
 
 # Initialize FastAPI application with a title
-app = FastAPI(title="OpenAI Chat API", root_path="/api")
+app = FastAPI(title="OpenAI Chat API")
 
 # Configure CORS (Cross-Origin Resource Sharing) middleware
 app.add_middleware(
