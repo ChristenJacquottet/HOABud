@@ -3,5 +3,23 @@
   "builds": [
     { "src": "frontend/package.json", "use": "@vercel/next" },
     { "src": "api/*.py",            "use": "@vercel/python" }
+   ],
+  "routes": [
+    {
+      "src": "/api/upload/?",
+      "dest": "api/upload.py"
+    },
+    {
+      "src": "/api/chat/?",
+      "dest": "api/chat.py"
+    },
+    {
+      "src": "/api/health/?",
+      "dest": "api/health.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
+    }
   ]
 }
