@@ -40,4 +40,4 @@ See [`Roadmap.md`](Roadmap.md) for the detailed development plan.
 
 ## License
 
-TBD – select a license appropriate for commercial use.
+This project is licensed under the [GNU Affero General Public License v3.0 (AGPL)](./LICENSE)
