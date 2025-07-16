@@ -6,9 +6,9 @@ from pydantic import BaseModel
 from typing import Optional
 from openai import OpenAI
 
-from aimakerspace.text_utils import PDFLoader, CharacterTextSplitter
-from aimakerspace.vectordatabase import VectorDatabase
-from aimakerspace.openai_utils.embedding import EmbeddingModel
+from .aimakerspace.text_utils import PDFLoader, CharacterTextSplitter
+from .aimakerspace.vectordatabase import VectorDatabase
+from .aimakerspace.openai_utils.embedding import EmbeddingModel
 
 app = FastAPI(title="HOA Bud API")
 
@@ -108,4 +108,4 @@ async def health():
 # Entry point for running the application directly
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("api.index:app", host="0.0.0.0", port=8000, reload=True)
